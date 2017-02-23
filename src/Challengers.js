@@ -11,8 +11,8 @@ export default class Challengers {
       let challengers = lockr.get('challengers')
       return challengers
     }
-    let challengers = ['Michał K', 'Bartek', 'Kamil', 'Błażej', 'Filip']
-    return challengers
+    let allLamas = ['Michał K', 'Bartek', 'Kamil', 'Błażej', 'Filip']
+    return allLamas
   }
 
   displayChallengers () {
@@ -32,5 +32,15 @@ export default class Challengers {
     let listItem = document.createElement('li')
     listItem.innerHTML = challenger
     this.challengersList.appendChild(listItem)
+  }
+
+  clearStorage () {
+    if (lockr.get('challengers') != null) {
+      lockr.rm('challengers')
+      this.challengers = []
+      while (this.challengersList.firstChild) {
+        this.challengersList.removeChild(this.challengersList.firstChild)
+      }
+    }
   }
 }
