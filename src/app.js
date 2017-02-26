@@ -14,12 +14,10 @@ document.addEventListener('DOMContentLoaded', function () {
       form.displayErrors()
     }
   })
-
-  form.clearBtn.addEventListener('click', () => {
-    challenge.clearStorage()
-  })
+  form.clearBtn.addEventListener('click', () => challenge.clearStorage())
 
   form.addLamasBtn.addEventListener('click', () => {
+    challenge.setChallengers()
     challenge.displayChallengers()
   })
 })

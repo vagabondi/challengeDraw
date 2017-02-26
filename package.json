@@ -24,6 +24,7 @@
     "webpack-dev-server": "^2.3.0"
   },
   "dependencies": {
+    "jsdoc": "^3.4.3",
     "lockr": "^0.8.4"
   }
 }

@@ -4,8 +4,8 @@ export default class Form {
   constructor () {
     this.input = document.getElementById('input')
     this.addBtn = document.getElementById('add-btn-js')
-    this.drawTechGiverBtn = document.getElementById('losuj-btn-js')
-    this.drawChallengeGiverBtn = document.getElementById('losuj2-btn-js')
+    this.drawTechGiverBtn = document.getElementById('draw-tech-btn-js')
+    this.drawChallengeGiverBtn = document.getElementById('draw-challenge-btn-js')
     this.resetBtn = document.getElementById('reset-btn-js')
     this.clearBtn = document.getElementById('clear-btn-js')
     this.addLamasBtn = document.getElementById('add-lamas-btn-js')
