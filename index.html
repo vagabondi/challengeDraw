@@ -30,12 +30,24 @@
                 </p>
                 <div id="list_notices"></div>
                 <label class="label">Losowanie</label>
-                <p class="control">
-                    <button class="button is-success" id="draw-tech-btn-js">Losuj</button>
-                    <button class="button is-success" id="draw-challenge-btn-js">Losuj2</button>
-                    <button class="button is-success" id="reset-btn-js">Reset</button>
-                </p>
+                <div class="columns is-multiline is-mobile">
+                    <div class="column is-half">
+                        <button class="button is-success" id="draw-tech-btn-js">Losuj</button>
+                        <textarea class="textarea" id="technology-js"></textarea>
+                        <button class="button is-success" id="technology-submit-js">Submit</button>
+                    </div>
+                    <div class="column is-half">
+                        <button class="button is-success" id="draw-challenge-btn-js">Losuj2</button>
+                        <textarea class="textarea" id="challenge-js"></textarea>
+                        <button class="button is-success" id="challenge-submit-js">Submit</button>
+                    </div>
+                </div>
+                <button class="button is-success" id="save-js">Save</button>
+                <section id="results">
+
+                </section>
             </main>
+
             <!-- <progress class="progress is-success" value="60" max="100">60%</progress> -->
         </div>
     </div>

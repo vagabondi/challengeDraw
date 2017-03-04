@@ -4,9 +4,13 @@ export default class Form {
     this.addBtn = document.getElementById('add-btn-js')
     this.drawTechGiverBtn = document.getElementById('draw-tech-btn-js')
     this.drawChallengeGiverBtn = document.getElementById('draw-challenge-btn-js')
-    this.resetBtn = document.getElementById('reset-btn-js')
     this.clearBtn = document.getElementById('clear-btn-js')
     this.addLamasBtn = document.getElementById('add-lamas-btn-js')
+    this.challengeText = document.getElementById('challenge-js')
+    this.technologyText = document.getElementById('technology-js')
+    this.challengeSubmit = document.getElementById('challenge-submit-js')
+    this.technologySubmit = document.getElementById('technology-submit-js')
+    this.saveBtn = document.getElementById('save-js')
     this.errors = document.getElementById('errors')
     this.errorsList = []
   }
@@ -15,7 +19,7 @@ export default class Form {
       this.errorsList.push('Uzupełnij powyższe pole!')
     }
     for (let i = 0, length = challengers.length; i < length; i++) {
-      if (challengers[i] === value) {
+      if (challengers[i].toLowerCase() === value.toLowerCase()) {
         this.errorsList.push('Ten ziomeczek już jest na liście')
         break
       }

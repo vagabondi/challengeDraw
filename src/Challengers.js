@@ -80,6 +80,6 @@ export default class Challengers {
     setTimeout(() => {
       this.noticesList = []
       this.notices.innerHTML = ''
-    }, 5000)
+    }, 3000)
   }
 }
