@@ -1,5 +1,3 @@
-// import Challengers from './Challenge'
-
 export default class Form {
   constructor () {
     this.input = document.getElementById('input')
@@ -12,23 +10,27 @@ export default class Form {
     this.errors = document.getElementById('errors')
     this.errorsList = []
   }
-  validateInput () {
-    if (this.input.value !== '') {
-      return true
+  validateInput (value, challengers) {
+    if (value === '') {
+      this.errorsList.push('Uzupełnij powyższe pole!')
     }
-    this.errorsList.push('Wypełnij pole')
-    return false
+    for (let i = 0, length = challengers.length; i < length; i++) {
+      if (challengers[i] === value) {
+        this.errorsList.push('Ten ziomeczek już jest na liście')
+        break
+      }
+    }
   }
   displayErrors () {
-    this.errorsList.forEach((message) => {
-      let error = document.createElement('p')
-      error.innerText = message
-      this.errors.appendChild(error)
+    this.errorsList.forEach((error) => {
+      let listItem = document.createElement('p')
+      listItem.className += 'help is-danger'
+      listItem.innerHTML = error
+      this.errors.appendChild(listItem)
     })
   }
   clearErrors () {
-    while (this.errors.firstChild) {
-      this.errors.removeChild(this.errors.firstChild)
-    }
+    this.errorsList = []
+    this.errors.innerHTML = ''
   }
 }

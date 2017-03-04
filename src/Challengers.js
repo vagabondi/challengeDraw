@@ -11,63 +11,75 @@ export default class Challengers {
   constructor () {
     this.challengers = []
     this.challengersList = document.querySelector('#challengers_list ul')
+    this.notices = document.getElementById('list_notices')
+    this.noticesList = []
   }
-
-  /**
-   * Setting initial list of challengers
-   */
-  setChallengers () {
-    let allLamas = ['Michał K', 'Bartek', 'Kamil', 'Błażej', 'Filip']
-    if (lockr.get('challengers') !== null) {
-      let challengers = lockr.get('challengers')
-      this.challengers = challengers
-    }
-    if (this.challengers !== allLamas) {
-      lockr.set('challengers', allLamas)
+  init (allLamas) {
+    let storage = lockr.get('challengers')
+    if (storage != null) {
+      this.challengers = storage
+    } else {
       this.challengers = allLamas
+      lockr.set('challengers', this.challengers)
     }
   }
-
-  /**
-   * Displaying challengers on list
-   */
-  displayChallengers () {
+  updateList () {
+    this.challengersList.innerHTML = ''
     let challengers = this.challengers
-    for (let i = 0, length = challengers.length; i < length; i++) {
-      this.createListItem(challengers[i])
+    if (challengers.length > 0) {
+      for (let i = 0, length = challengers.length; i < length; i++) {
+        this.createListItem(challengers[i])
+      }
+    } else {
+      this.challengersList.innerHTML = ''
     }
+    this.updateStorage()
   }
-
-  /**
-   * Adding new single challenger
-   * @param {String} challenger
-   */
-  addNewChallenger (challenger) {
-    this.challengers.push(challenger)
-    lockr.set('challengers', this.challengers)
-    this.createListItem(challenger)
-  }
-
-  /**
-   * Creating new list item
-   * @param challenger
-     */
-  createListItem (challenger) {
+  createListItem (item) {
     let listItem = document.createElement('li')
-    listItem.innerHTML = challenger
+    listItem.innerHTML = item
+    listItem.id = item.replace(/\s+/g, '-').toLowerCase()
     this.challengersList.appendChild(listItem)
   }
-
-  /**
-   * Function to clear list of challengers
-   */
+  updateStorage () {
+    lockr.set('challengers', this.challengers)
+  }
+  add (item) {
+    this.createListItem(item)
+    this.challengers.push(item)
+    this.updateStorage()
+  }
   clearStorage () {
-    if (lockr.get('challengers') != null) {
-      lockr.rm('challengers')
-      this.challengers = []
-      while (this.challengersList.firstChild) {
-        this.challengersList.removeChild(this.challengersList.firstChild)
+    this.challengers = []
+    this.updateStorage()
+  }
+  addLamas (lamas) {
+    let fails = 0
+    for (let i = 0, length = lamas.length; i < length; i++) {
+      if (this.challengers.indexOf(lamas[i]) === -1) {
+        this.challengers.push(lamas[i])
+        this.updateList()
+        this.updateStorage()
+      } else {
+        fails++
       }
     }
+    if (fails > 0 && fails !== lamas.length) {
+      this.noticesList.push('Jedna lub więcej lam nie została dodana')
+    } else if (fails === lamas.length) {
+      this.noticesList.push('Wszystkie lamy są już na liście')
+    }
+  }
+  displayNotices () {
+    this.noticesList.forEach((notice) => {
+      let listItem = document.createElement('p')
+      listItem.className += 'help is-info'
+      listItem.innerHTML = notice
+      this.notices.appendChild(listItem)
+    })
+    setTimeout(() => {
+      this.noticesList = []
+      this.notices.innerHTML = ''
+    }, 5000)
   }
 }
