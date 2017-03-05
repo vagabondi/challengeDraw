@@ -33,11 +33,16 @@ document.addEventListener('DOMContentLoaded', function () {
     challengers.clearStorage()
     challengers.updateList()
   })
-
   form.addLamasBtn.addEventListener('click', () => {
     challengers.updateList()
     challengers.addLamas(allLamas)
     challengers.displayNotices()
+  })
+  document.querySelector('body').addEventListener('click', (e) => {
+    if (e.target.className === 'delete is-small remove-challenger-btn') {
+      let toRemove = document.getElementById(e.target.dataset.remove)
+      challengers.delete(toRemove)
+    }
   })
   form.drawChallengeGiverBtn.addEventListener('click', () => {
     draw.drawChallengeGiver(challengers.challengers)

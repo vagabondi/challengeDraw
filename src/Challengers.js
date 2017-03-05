@@ -36,9 +36,13 @@ export default class Challengers {
     this.updateStorage()
   }
   createListItem (item) {
+    let itemId = item.replace(/\s+/g, '-').toLowerCase()
     let listItem = document.createElement('li')
     listItem.innerHTML = item
-    listItem.id = item.replace(/\s+/g, '-').toLowerCase()
+    listItem.id = itemId
+    listItem.innerHTML += `
+        <a class="delete is-small remove-challenger-btn" data-remove="${itemId}"></a>
+    `
     this.challengersList.appendChild(listItem)
   }
   updateStorage () {
@@ -47,6 +51,13 @@ export default class Challengers {
   add (item) {
     this.createListItem(item)
     this.challengers.push(item)
+    this.updateStorage()
+  }
+  delete (item) {
+    let value = item.innerText
+    let index = this.challengers.indexOf(value)
+    this.challengersList.removeChild(item)
+    this.challengers.splice(index, 1)
     this.updateStorage()
   }
   clearStorage () {
