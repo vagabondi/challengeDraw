@@ -30,4 +30,12 @@ export default class Draw {
   updateResults () {
     lockr.set('drawResults', this.drawResults)
   }
+  displayResults () {
+    const container = document.getElementById('drawResults')
+    for (let prop in this.drawResults) {
+      let listItem = document.createElement('li')
+      listItem.innerHTML = prop + ': ' + this.drawResults[prop]
+      container.appendChild(listItem)
+    }
+  }
 }

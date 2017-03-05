@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
     form.technologySubmit.disabled = 'true'
   })
   form.saveBtn.addEventListener('click', () => {
+    draw.displayResults()
     results.saveResults()
     form.saveBtn.disabled = 'true'
   })
